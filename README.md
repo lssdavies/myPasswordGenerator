@@ -37,7 +37,7 @@ THEN the password is either displayed in an alert or written to the page
 
 ## Web Application
 
-Deplyed web application: https://lssdavies.github.io/myPasswordGenerator/
+Deployed web application: https://lssdavies.github.io/myPasswordGenerator/
 
 Screen shot of Web App:
-![Web App](/Develop/myPassowrdGenerator.PNG)
+![Web App](myPassowrdGenerator.PNG)
