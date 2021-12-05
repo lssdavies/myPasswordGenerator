@@ -4,12 +4,15 @@ var specialCharacters = [' ', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', 
 
 var numbericalCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 
-var upperCaseCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J','K', 'L' ,'M' ,'N', 'O', 'P', 'Q', 'R', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+var upperCaseCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J','K', 'L' ,'M' ,'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 var lowerCaseCharacters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-//Declaring blank variable to store user selected characters to be used in password
+//Declaring blank variable/array to store user selected characters to be used in password
 var selectedCharacterOptions = [];
+
+//Declaring a blank variables/array to store randomly slected characters from selectedCharacterOptions
+var randomCharacters = [];
 
 var passwordLength = 0;   
  
@@ -40,8 +43,11 @@ var totalCharacters = function() {
     }    
 }
 
-//function to capture user input determine character types to construct password
+//function includes to functions 1 to capture user input and the order to validate at least one charater type is selected
 var userSelectedCharacters = function() {
+
+    //This function captures user input
+    var userInput = function()  {
     //user confirms if they will like special characters in the password
     var useSpecialCharacters = window.confirm("Please confirm if to include special characters")
     if (useSpecialCharacters)   {
@@ -100,12 +106,39 @@ var userSelectedCharacters = function() {
         console.log("User chose not to use lowercase in the password");
         console.log(selectedCharacterOptions);
      }
+    }
+    
+    //this function validates that the user has slected at least one character type using a while loop
+    var vaildateInput = function()  {
+        while (selectedCharacterOptions.length === 0)   {
+            window.alert("Please select at least one character type");
+            userInput();
+        }
+    }
+    userInput();
+    vaildateInput();
+}
 
+//this function will randomly select characters from selectedCharacter array to contruct the password based on the length stored in var passwordLength
+var randomCharacterSelection = function()   {
+
+    //For loop to run through and select characters from selectedCharacterOptions based on passwordLength
+    for (var i = 0; i < passwordLength; i++)    {
+    //Using math methods to randomly generate index numbers based off selectedCharacterOptions.length
+    var randomCharacter = selectedCharacterOptions[Math.floor(Math.random()*selectedCharacterOptions.length)];
+    randomCharacters.push(randomCharacter);
+    
+    }
+      
 }
 
 var generatePassword = function ()  {
+    //this function run all the functions needed to accept and validate user inputs and generate password.
     totalCharacters();
     userSelectedCharacters();
+    randomCharacterSelection();
+    return randomCharacters.join('');
+    
 }
 
 
@@ -114,6 +147,11 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
+//   added line of code to reset global variables selectedCharacterOptions and randomCharacters to generate new password without refereshing the page
+  if (selectedCharacterOptions.length != 0 || randomCharacters.lenght != 0 ) {
+      selectedCharacterOptions = [];
+      randomCharacters = [];
+  } 
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
