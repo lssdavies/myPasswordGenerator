@@ -40,4 +40,4 @@ THEN the password is either displayed in an alert or written to the page
 Deplyed web application: https://lssdavies.github.io/myPasswordGenerator/
 
 Screen shot of Web App:
-![Web App](/assets/images/myPassowrdGenerator.PNG)
+![Web App](/Develop/myPassowrdGenerator.PNG)
